@@ -1,4 +1,6 @@
 """待候选人实现。避免读取dev_answers或题号/condition来构造答案。"""
+import re
+
 def prepare_messages(question, passages):
     """返回 [{"role":"system|user", "content":"..."}, ...]。
     passages仅含id/source/text，不包含答案或条件标记。
@@ -37,4 +39,25 @@ def prepare_messages(question, passages):
 def improve(question, passages):
     """返回重新组织/选择的原段落列表，不能修改id/source/text或使用答案标签。
     默认恒等映射仅用于联通，不算已完成改进。可自行扩展结构/调用，须披露与记录。"""
+
+    pattern = r'[\u4e00-\u9fff]{2}项目|R\d+|\d{4}-\d{2}'
+    terms = re.findall(pattern, question)
+
+    rest = re.sub(pattern, ' ', question)
+    rest = re.split('[？?]', rest)[0]
+
+    grams = set()
+    for i in range(len(rest) - 1):
+        g = rest[i:i+2]
+        if ' ' not in g:
+            grams.add(g)
+
+    scored = []
+    for p in passages:
+        head = re.split('[。；]', p['text'])[0]
+        hard = sum(t in p['text'] for t in terms)
+        clue = sum(g in head for g in grams)
+        scored.append((hard, clue, p))
+
+    print([(h, c, p['id']) for h, c, p in scored])
     return passages
