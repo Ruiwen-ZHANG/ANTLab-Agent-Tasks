@@ -52,13 +52,18 @@
 **提醒自己**：每题的 4 个条件是配对观察，不是 32 道独立题。8 道题的样本很小，差异只能逐题解释，不能说"统计上更好"。
 
 
-连通性测试
-PS D:\PythonProjects\ANTLab-Agent-Tasks> $r.usage
+- 连通性测试
+- PS D:\PythonProjects\ANTLab-Agent-Tasks> $r.usage
+
+- prompt_tokens            : 9
+- completion_tokens        : 1
+- total_tokens             : 10
+- prompt_tokens_details    : @{cached_tokens=0}
+- prompt_cache_hit_tokens  : 0
+- prompt_cache_miss_tokens : 9
 
 
-prompt_tokens            : 9
-completion_tokens        : 1
-total_tokens             : 10
-prompt_tokens_details    : @{cached_tokens=0}
-prompt_cache_hit_tokens  : 0
-prompt_cache_miss_tokens : 9
+- 开发调试记录
+
+- v1 / D01 R0 / run ee2a4b01：输出"证据不足"，引用了全部 7 段；参考答案为 80%（P312446 + P898100）。
+- 原因判断：规则要求"每段都全部吻合"，而 P898100 只能通过批次代号 CS41 关联到 P312446，题目问的指标也需要计算得出，不是直接写出的。规则过严，导致拒答。
