@@ -50,3 +50,15 @@
 - 什么会推翻它：K 在这类题上同样能正确回答"证据不足"。
 
 **提醒自己**：每题的 4 个条件是配对观察，不是 32 道独立题。8 道题的样本很小，差异只能逐题解释，不能说"统计上更好"。
+
+
+连通性测试
+PS D:\PythonProjects\ANTLab-Agent-Tasks> $r.usage
+
+
+prompt_tokens            : 9
+completion_tokens        : 1
+total_tokens             : 10
+prompt_tokens_details    : @{cached_tokens=0}
+prompt_cache_hit_tokens  : 0
+prompt_cache_miss_tokens : 9
