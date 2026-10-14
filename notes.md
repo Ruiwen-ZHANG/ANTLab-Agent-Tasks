@@ -106,3 +106,42 @@
 - 预测（运行前写下）：若 C 成立，重复运行 R1 会出现不同答案；若 3 次相同，则随机性不是主因。
 - 结果：1a6d21e7、910665ab、8e57c888 三次均为"证据不足"，引用均为 P312446、P898100；student 哈希均为 9a1fa281。
 - 结论：在该输入上随机性不是主因；顺序相关的解释（A 或 B）更可能。样本只有 1 个输入 × 3 次，不推广为"API 确定"。B 仅有 D01 一题支持，待正式题检验。
+
+## 正式基线 32 次（冻结 commit b5da369，prompt v3）
+- 技术状态：32/32 ok，无失败，无重试
+- 本阶段只检查技术状态，未查看答案内容
+
+```
+ae988e9b-dc36-4de5-896b-5dd7ae420eaa T08 R2 ok
+ddb8e32e-98b1-4276-9551-9c36f2311f64 T04 R0 ok
+13076bbe-cc1f-420c-8700-6725c8941525 T05 K ok
+049bda13-0bbb-4550-9eb5-e2ff12873c40 T03 R0 ok
+29e97d8c-d466-4d58-9707-5f6a86ba9ec8 T03 R2 ok
+4c92f6e2-70b2-4d29-a5cb-c4551d9075bf T08 R1 ok
+397a2b96-4f41-4293-ad17-a092e441e92e T04 R1 ok
+cbe9d1e1-a087-4c63-ab95-ae3fc586ed96 T02 R1 ok
+a8c88b79-74f0-4010-84d2-a298e4a4d9f9 T07 R1 ok
+8ce2ccef-9971-49fc-8fab-82dc12c044ec T07 K ok
+f9a54dc1-62cb-4229-8f61-2adf3cb0be27 T04 K ok
+f8fab72e-1605-413f-a45d-13ec153d3585 T02 R0 ok
+b45cac4d-8144-4f19-9c68-46add13f0d62 T03 K ok
+25687f0e-337d-481a-b81d-de3a9ae80d0a T04 R2 ok
+0fc09ed3-47af-42ee-88b2-dde0b3f1a278 T05 R2 ok
+e4c243eb-660c-4f04-beb0-a451b41a17f7 T06 K ok
+b9e53c43-7dd3-4932-9015-02c896cb4843 T01 R0 ok
+14e7adb9-66b5-41bc-a0fa-cf7a1162d644 T01 K ok
+0516d4ad-18f2-41e8-82b5-2c8e429a4bb6 T01 R1 ok
+144c1981-6011-4432-931e-421425f748d7 T07 R0 ok
+6c786092-031d-4bb1-8cb9-eca36c2b0f5d T06 R2 ok
+72ba909a-5e18-4f0f-b45b-96348b6ac30e T06 R0 ok
+e86f626f-687d-4e7c-9112-f957f7d6ddb7 T07 R2 ok
+c00b9605-c57d-478f-8806-f2ad55e37544 T02 K ok
+cd76e806-7b28-4560-8598-c36103cc1a34 T05 R1 ok
+20b89596-265b-41b7-aad3-ac2f2016e405 T02 R2 ok
+31b69731-a527-4a83-9c05-2d6e045235d9 T05 R0 ok
+16804a9e-c949-4aea-a8e6-bf3e9046ba2c T08 R0 ok
+38ce8606-9469-4d0e-9e1a-c7cb6b9e67f2 T03 R1 ok
+0533087b-64f5-48d3-a671-8e332747db32 T06 R1 ok
+a22a4f38-236a-4e07-9887-7cc068d6fd01 T01 R2 ok
+a48cd6a8-816c-4565-b9f7-6ebe2745205c T08 K ok
+```

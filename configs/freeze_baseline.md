@@ -10,4 +10,4 @@
 - 运行命令：python starter/runner.py --split evaluation --condition all --limit 32 --paid --config config.local.json
 - 冻结后规则：不再修改 student.py 的 prepare_messages 与配置；之后的任何改动都标为探索
 - 开发集接触：仅用 D01–D04 调试；冻结前未运行、未查看任何 T 题的模型输出
-- 对应 git tag：freeze-baseline（commit SHA 见 git log）
+- 对应 git tag：freeze-baseline（commit b5da369）
