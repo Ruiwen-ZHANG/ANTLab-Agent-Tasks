@@ -145,3 +145,11 @@ cd76e806-7b28-4560-8598-c36103cc1a34 T05 R1 ok
 a22a4f38-236a-4e07-9887-7cc068d6fd01 T01 R2 ok
 a48cd6a8-816c-4565-b9f7-6ebe2745205c T08 K ok
 ```
+
+## E1：页面全链路验证
+- 启动：python starter/server.py --config config.local.json --allow-paid
+- 页面选择：D01 / R0 / 基线 / 自费API
+- run_id：14b6855d
+- 结果："content": "{\"answer\": \"证据不足\", \"citations\": [\"P312446\", \"P898100\"]}"
+- 截图：docs/e1_page_run.png
+- 说明：页面验证用的额外调用，不计入 40 次主结果
