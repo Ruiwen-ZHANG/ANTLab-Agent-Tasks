@@ -1,0 +1,90 @@
+{
+  "seed": 20261015,
+  "student_sha_note": "运行时的 基础/starter/student.py",
+  "rows": [
+    {
+      "case": "D01",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": true,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    },
+    {
+      "case": "D02",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": false,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    },
+    {
+      "case": "D03",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": true,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    },
+    {
+      "case": "D04",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": true,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    },
+    {
+      "case": "T01",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": true,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    },
+    {
+      "case": "T02",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": true,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    },
+    {
+      "case": "T03",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": true,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    },
+    {
+      "case": "T04",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": true,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    },
+    {
+      "case": "T05",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": true,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    },
+    {
+      "case": "T06",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": true,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    },
+    {
+      "case": "T07",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": true,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    },
+    {
+      "case": "T08",
+      "same_after_remap": true,
+      "same_top2_after_shuffle": true,
+      "same_full_after_shuffle": false,
+      "old_id_leaks": 0
+    }
+  ]
+}
