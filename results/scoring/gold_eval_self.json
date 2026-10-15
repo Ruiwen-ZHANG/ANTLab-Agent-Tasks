@@ -1,0 +1,10 @@
+[
+  {"id": "T01", "answer": "S24", "aliases": ["S24"], "evidence_ids": ["P555495", "P761989"], "reason": "S23缺坐标映射，S25有未关闭问题，仅S24完成三项检查"},
+  {"id": "T02", "answer": "76%", "aliases": ["76%"], "evidence_ids": ["P552476", "P169676"], "reason": "完全支持76条/固定分母100条"},
+  {"id": "T03", "answer": "2.6", "aliases": ["2.6"], "evidence_ids": ["P385105", "P362285"], "reason": "9.4-6.8=2.6秒"},
+  {"id": "T04", "answer": "流程乙", "aliases": ["流程乙", "乙"], "evidence_ids": ["P758661", "P660995"], "reason": "错误证据<=3条只有乙(2条)合格"},
+  {"id": "T05", "answer": "证据不足", "aliases": ["证据不足"], "evidence_ids": [], "reason": "TL46未采集功率与能耗，无焦耳数据"},
+  {"id": "T06", "answer": "25%", "aliases": ["25%"], "evidence_ids": ["P873502", "P721388"], "reason": "(超时8+格式不合法7)/60=25%"},
+  {"id": "T07", "answer": "丙", "aliases": ["丙", "方案丙"], "evidence_ids": ["P313278", "P850395"], "reason": "甲支持率84%、乙P50 7.4秒不合格，仅丙合格"},
+  {"id": "T08", "answer": "K17", "aliases": ["K17"], "evidence_ids": ["P183430", "P223300"], "reason": "K16定位偏移、K18会话恢复失败，仅K17三项通过"}
+]
