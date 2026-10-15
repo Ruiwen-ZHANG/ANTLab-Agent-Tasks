@@ -40,7 +40,7 @@ def improve(question, passages):
     """返回重新组织/选择的原段落列表，不能修改id/source/text或使用答案标签。
     默认恒等映射仅用于联通，不算已完成改进。可自行扩展结构/调用，须披露与记录。"""
 
-    pattern = r'[\u4e00-\u9fff]{2}项目|R\d+|\d{4}-\d{2}'
+    pattern = r'[\u4e00-\u9fff]{2}项目|R\d+|\d{4}-\d{2}'  #项目名 或 版本 或 月份
     terms = re.findall(pattern, question)
 
     rest = re.sub(pattern, ' ', question)
@@ -59,5 +59,15 @@ def improve(question, passages):
         clue = sum(g in head for g in grams)
         scored.append((hard, clue, p))
 
-    print([(h, c, p['id']) for h, c, p in scored])
-    return passages
+    ranked = sorted(scored, key=lambda t: (t[0], t[1]), reverse=True)
+    main = ranked[0][2]
+    main_head = re.split('[。；]', main['text'])[0]
+    codes = re.findall(r'[A-Z]{2}\d{2}',main_head)
+    supplements = []
+    for p in passages:
+        if p is not main and any(c in p['text'] for c in codes):
+            supplements.append(p)
+
+    others = [p for p in passages if p is not main and p not in supplements]
+    return [main] + supplements + others
+
