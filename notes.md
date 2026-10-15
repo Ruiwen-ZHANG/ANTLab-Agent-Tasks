@@ -199,3 +199,19 @@ a48cd6a8-816c-4565-b9f7-6ebe2745205c T08 K ok
 - 预测 3：prepare_messages 输出中不出现任何旧 ID
 
 - 结果：与预测完全一致。12/12 ID 重映射后顺序不变；0 旧 ID 泄漏；打乱后 11/12 前两段不变，唯一例外 D02（预测到的平局题）。结果文件 results/variant/remap_check_result.json
+
+
+# B 题：系统失效诊断
+## 主症状（原样机复现，runs/b/baseline_original.json）
+- R01（alpha/v1）→ R02（alpha/v2）连续运行：R02 返回 v1 证据 b01、答案"30秒"、cache_hit=True；正确应为 b02、12秒
+## 两个竞争解释与预测（干预实验前写）
+- 解释1（缓存键不完整）：缓存键只含 query 文本，不含 snapshot，R02 命中 R01 的缓存
+  → 预测：新实例单独运行 R02 会得到正确的 b02；R01 后把 R02 换成同义词序查询（键不同）也会得到 b02
+- 解释2（检索/过滤取错版本）：排序或版本过滤本身有问题，与缓存无关
+  → 预测：新实例单独运行 R02 仍得到 b01；换词序也仍得到 b01
+- 依据说明：本人与 Claude 已阅读源码，源码第13行的缓存键提示解释1；但"看见可疑代码"不等于确认它导致症状，需干预验证
+
+## B 题页面验证
+- 启动：cd 进阶/challenge_b; python server_compare.py → http://127.0.0.1:8767
+- 不清空状态，依次运行 R01 → R02：原样机 R02 返回 v1 证据 b01（cache_hit=true，页面标红"快照不一致"）；修复版返回 v2 证据 b02（cache_hit=false）
+- 截图：docs/b_compare_R01.png、docs/b_compare_R02.png

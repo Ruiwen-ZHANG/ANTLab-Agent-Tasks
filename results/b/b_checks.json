@@ -1,0 +1,614 @@
+[
+  {
+    "id": "B1",
+    "kind": "复现",
+    "title": "原样机 R01→R02：R02 请求 v2 却返回 v1 证据",
+    "expected": "若故障存在：R02 证据为 b01（snapshot v1）、答案为30秒、cache_hit=True",
+    "actual": [
+      {
+        "case": "R01",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "v1",
+          "k": 2
+        },
+        "evidence_ids": [
+          "b01"
+        ],
+        "evidence_snapshots": [
+          "v1"
+        ],
+        "answer": "请求超时阈值为30秒。",
+        "locator_status": "valid",
+        "support_status": "supported",
+        "cache_hit": false,
+        "elapsed_ms": 0.0869,
+        "run_kind": "offline_replay",
+        "request_id": "0ed679fb-ef79-4748-8403-fbbb46f0e099"
+      },
+      {
+        "case": "R02",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "v2",
+          "k": 2
+        },
+        "evidence_ids": [
+          "b01"
+        ],
+        "evidence_snapshots": [
+          "v1"
+        ],
+        "answer": "请求超时阈值为30秒。",
+        "locator_status": "valid",
+        "support_status": "supported",
+        "cache_hit": true,
+        "elapsed_ms": 0.0247,
+        "run_kind": "offline_replay",
+        "request_id": "f188491b-8b21-4b5f-be0a-b6f6e980b212"
+      }
+    ],
+    "result": "PASS"
+  },
+  {
+    "id": "B1b",
+    "kind": "复现-最早边界",
+    "title": "R02 的证据快照与请求快照不一致（最早出错在缓存查找，检索之前）",
+    "expected": "请求 snapshot=v2，返回证据 snapshot 应为 v2；故障时为 v1，且 cache_hit=True 说明未进入检索",
+    "actual": {
+      "request_snapshot": "v2",
+      "evidence_snapshots": [
+        "v1"
+      ],
+      "cache_hit": true
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "B2",
+    "kind": "干预",
+    "title": "原样机新实例单独运行 R02（不经过 R01）",
+    "expected": "解释1预测：得到 b02/12秒；解释2预测：仍得到 b01",
+    "actual": {
+      "case": "R02",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "v2",
+        "k": 2
+      },
+      "evidence_ids": [
+        "b02"
+      ],
+      "evidence_snapshots": [
+        "v2"
+      ],
+      "answer": "请求超时阈值为12秒。",
+      "locator_status": "valid",
+      "support_status": "supported",
+      "cache_hit": false,
+      "elapsed_ms": 0.0314,
+      "run_kind": "offline_replay",
+      "request_id": "0c559d6e-a7b6-4875-b97a-d489a914f54a"
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "B3",
+    "kind": "干预",
+    "title": "原样机 R01 后，R02 改用同义词序 \"threshold request timeout\"（缓存键不同）",
+    "expected": "解释1预测：键不同→不命中→得到 b02；解释2预测：仍得到 b01",
+    "actual": {
+      "case": "R02",
+      "request": {
+        "query": "threshold request timeout",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "v2",
+        "k": 2
+      },
+      "evidence_ids": [
+        "b02"
+      ],
+      "evidence_snapshots": [
+        "v2"
+      ],
+      "answer": "请求超时阈值为12秒。",
+      "locator_status": "valid",
+      "support_status": "supported",
+      "cache_hit": false,
+      "elapsed_ms": 0.027,
+      "run_kind": "offline_replay",
+      "request_id": "6cae0128-9343-47bb-a5e3-d165bfc4175d"
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "B4",
+    "kind": "反向因果",
+    "title": "原样机 R02 的\"更快\"来自命中旧缓存，而非更好的检索",
+    "expected": "复现中 R02 cache_hit=True（未进入检索），新实例 cache_hit=False；耗时仅作参考（毫秒级，含波动），快 ≠ 对",
+    "actual": {
+      "stale_hit_ms": 0.0247,
+      "stale_cache_hit": true,
+      "fresh_ms": 0.0314,
+      "fresh_cache_hit": false
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "B5",
+    "kind": "修复",
+    "title": "修复版 R01→R02（与 B1 完全相同的输入与顺序）",
+    "expected": "R02 证据 b02、答案12秒、cache_hit=False",
+    "actual": [
+      {
+        "case": "R01",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "v1",
+          "k": 2
+        },
+        "evidence_ids": [
+          "b01"
+        ],
+        "evidence_snapshots": [
+          "v1"
+        ],
+        "answer": "请求超时阈值为30秒。",
+        "locator_status": "valid",
+        "support_status": "supported",
+        "cache_hit": false,
+        "elapsed_ms": 0.0885,
+        "run_kind": "offline_replay",
+        "request_id": "9bf8314f-11a6-42e9-9f1c-2db84c0b7947"
+      },
+      {
+        "case": "R02",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "v2",
+          "k": 2
+        },
+        "evidence_ids": [
+          "b02"
+        ],
+        "evidence_snapshots": [
+          "v2"
+        ],
+        "answer": "请求超时阈值为12秒。",
+        "locator_status": "valid",
+        "support_status": "supported",
+        "cache_hit": false,
+        "elapsed_ms": 0.0505,
+        "run_kind": "offline_replay",
+        "request_id": "7ab1be98-406b-43cb-9b8c-66f57158fc07"
+      }
+    ],
+    "result": "PASS"
+  },
+  {
+    "id": "B6",
+    "kind": "回归",
+    "title": "R01 单独运行仍返回 b01、locator valid",
+    "expected": "与原样机 R01 一致：b01、valid",
+    "actual": {
+      "case": "R01",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "v1",
+        "k": 2
+      },
+      "evidence_ids": [
+        "b01"
+      ],
+      "evidence_snapshots": [
+        "v1"
+      ],
+      "answer": "请求超时阈值为30秒。",
+      "locator_status": "valid",
+      "support_status": "supported",
+      "cache_hit": false,
+      "elapsed_ms": 0.0359,
+      "run_kind": "offline_replay",
+      "request_id": "f37ed953-d926-4a00-8734-2a00863917b0"
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "B7",
+    "kind": "回归",
+    "title": "R05、R06 仍返回各自证据且 valid",
+    "expected": "R05→b05 valid；R06→b06 valid（与原样机一致）",
+    "actual": [
+      {
+        "case": "R05",
+        "request": {
+          "query": "metadata beta",
+          "doc_ids": [
+            "beta"
+          ],
+          "snapshot": "v1",
+          "k": 2
+        },
+        "evidence_ids": [
+          "b05"
+        ],
+        "evidence_snapshots": [
+          "v1"
+        ],
+        "answer": "文档编号为beta。",
+        "locator_status": "valid",
+        "support_status": "supported",
+        "cache_hit": false,
+        "elapsed_ms": 0.0354,
+        "run_kind": "offline_replay",
+        "request_id": "524df403-3853-4790-a41e-89b96161b3d7"
+      },
+      {
+        "case": "R06",
+        "request": {
+          "query": "worker single process",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "v2",
+          "k": 2
+        },
+        "evidence_ids": [
+          "b06"
+        ],
+        "evidence_snapshots": [
+          "v2"
+        ],
+        "answer": "此材料未测试多worker性能。",
+        "locator_status": "valid",
+        "support_status": "supported",
+        "cache_hit": false,
+        "elapsed_ms": 0.0419,
+        "run_kind": "offline_replay",
+        "request_id": "37f7cd70-fb46-438c-8cb7-8618c5721b9e"
+      }
+    ],
+    "result": "PASS"
+  },
+  {
+    "id": "B8",
+    "kind": "回归",
+    "title": "完全相同的请求重复两次：缓存仍可复用（spec 第5条允许保留缓存）",
+    "expected": "第二次 cache_hit=True，证据与第一次相同，request_id 不同",
+    "actual": [
+      {
+        "case": "R01",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "v1",
+          "k": 2
+        },
+        "evidence_ids": [
+          "b01"
+        ],
+        "evidence_snapshots": [
+          "v1"
+        ],
+        "answer": "请求超时阈值为30秒。",
+        "locator_status": "valid",
+        "support_status": "supported",
+        "cache_hit": false,
+        "elapsed_ms": 0.0316,
+        "run_kind": "offline_replay",
+        "request_id": "21328a32-17de-4bd5-9c23-b78068543690"
+      },
+      {
+        "case": "R01",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "v1",
+          "k": 2
+        },
+        "evidence_ids": [
+          "b01"
+        ],
+        "evidence_snapshots": [
+          "v1"
+        ],
+        "answer": "请求超时阈值为30秒。",
+        "locator_status": "valid",
+        "support_status": "supported",
+        "cache_hit": true,
+        "elapsed_ms": 0.025,
+        "run_kind": "offline_replay",
+        "request_id": "0a2dd6df-0550-4696-8553-85fbeae49389"
+      }
+    ],
+    "result": "PASS"
+  },
+  {
+    "id": "B9",
+    "kind": "变体-顺序",
+    "title": "修复版颠倒请求顺序 R02→R01，结果与 R01→R02 一致",
+    "expected": "两种顺序下 R01→b01、R02→b02（资料版本决定结果，与请求先后无关）",
+    "actual": {
+      "R01_then_R02": [
+        {
+          "case": "R01",
+          "request": {
+            "query": "timeout request threshold",
+            "doc_ids": [
+              "alpha"
+            ],
+            "snapshot": "v1",
+            "k": 2
+          },
+          "evidence_ids": [
+            "b01"
+          ],
+          "evidence_snapshots": [
+            "v1"
+          ],
+          "answer": "请求超时阈值为30秒。",
+          "locator_status": "valid",
+          "support_status": "supported",
+          "cache_hit": false,
+          "elapsed_ms": 0.03,
+          "run_kind": "offline_replay",
+          "request_id": "61051af7-e7de-4222-a91c-a4a3e39a88ca"
+        },
+        {
+          "case": "R02",
+          "request": {
+            "query": "timeout request threshold",
+            "doc_ids": [
+              "alpha"
+            ],
+            "snapshot": "v2",
+            "k": 2
+          },
+          "evidence_ids": [
+            "b02"
+          ],
+          "evidence_snapshots": [
+            "v2"
+          ],
+          "answer": "请求超时阈值为12秒。",
+          "locator_status": "valid",
+          "support_status": "supported",
+          "cache_hit": false,
+          "elapsed_ms": 0.0299,
+          "run_kind": "offline_replay",
+          "request_id": "24405e4c-9035-4aec-84d6-b2ccc6ed6931"
+        }
+      ],
+      "R02_then_R01": [
+        {
+          "case": "R02",
+          "request": {
+            "query": "timeout request threshold",
+            "doc_ids": [
+              "alpha"
+            ],
+            "snapshot": "v2",
+            "k": 2
+          },
+          "evidence_ids": [
+            "b02"
+          ],
+          "evidence_snapshots": [
+            "v2"
+          ],
+          "answer": "请求超时阈值为12秒。",
+          "locator_status": "valid",
+          "support_status": "supported",
+          "cache_hit": false,
+          "elapsed_ms": 0.0278,
+          "run_kind": "offline_replay",
+          "request_id": "a952b2d8-3542-4196-8fa5-e5b76b03c66a"
+        },
+        {
+          "case": "R01",
+          "request": {
+            "query": "timeout request threshold",
+            "doc_ids": [
+              "alpha"
+            ],
+            "snapshot": "v1",
+            "k": 2
+          },
+          "evidence_ids": [
+            "b01"
+          ],
+          "evidence_snapshots": [
+            "v1"
+          ],
+          "answer": "请求超时阈值为30秒。",
+          "locator_status": "valid",
+          "support_status": "supported",
+          "cache_hit": false,
+          "elapsed_ms": 0.0278,
+          "run_kind": "offline_replay",
+          "request_id": "69c1dca1-f921-4a54-8ab4-13ec8c08e3c0"
+        }
+      ]
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "B10",
+    "kind": "变体-措辞",
+    "title": "修复版 R02 改为大小写与首尾空格不同的等价查询",
+    "expected": "分词结果相同（strip+lower+split）→ 证据 b02",
+    "actual": {
+      "case": "R02",
+      "request": {
+        "query": "  Timeout REQUEST threshold ",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "v2",
+        "k": 2
+      },
+      "evidence_ids": [
+        "b02"
+      ],
+      "evidence_snapshots": [
+        "v2"
+      ],
+      "answer": "请求超时阈值为12秒。",
+      "locator_status": "valid",
+      "support_status": "supported",
+      "cache_hit": false,
+      "elapsed_ms": 0.1257,
+      "run_kind": "offline_replay",
+      "request_id": "18cab946-1796-4a57-8dc9-804ff24cdae0"
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "B11",
+    "kind": "变体-标识顺序",
+    "title": "doc_ids 顺序不同（[alpha,beta] vs [beta,alpha]）视为等价",
+    "expected": "证据相同；第二次命中缓存（键中 doc_ids 已排序）",
+    "actual": [
+      {
+        "case": "R01",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha",
+            "beta"
+          ],
+          "snapshot": "v1",
+          "k": 2
+        },
+        "evidence_ids": [
+          "b01"
+        ],
+        "evidence_snapshots": [
+          "v1"
+        ],
+        "answer": "请求超时阈值为30秒。",
+        "locator_status": "valid",
+        "support_status": "supported",
+        "cache_hit": false,
+        "elapsed_ms": 0.1125,
+        "run_kind": "offline_replay",
+        "request_id": "66095bdc-852a-40bf-a11b-cb74dd59cced"
+      },
+      {
+        "case": "R01",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "beta",
+            "alpha"
+          ],
+          "snapshot": "v1",
+          "k": 2
+        },
+        "evidence_ids": [
+          "b01"
+        ],
+        "evidence_snapshots": [
+          "v1"
+        ],
+        "answer": "请求超时阈值为30秒。",
+        "locator_status": "valid",
+        "support_status": "supported",
+        "cache_hit": true,
+        "elapsed_ms": 0.0677,
+        "run_kind": "offline_replay",
+        "request_id": "69f00fdc-ecdf-45b9-8296-6ca26bf688e8"
+      }
+    ],
+    "result": "PASS"
+  },
+  {
+    "id": "B12",
+    "kind": "边界-未修复",
+    "title": "R03（beta/v1, k=1）：范围外条目占用名额导致漏证据（spec 第2条）",
+    "expected": "按 spec 应返回 b03；当前先取 top-k 再过滤范围，b01 占掉唯一名额 → 证据为空（问题仍在）",
+    "actual": {
+      "case": "R03",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "beta"
+        ],
+        "snapshot": "v1",
+        "k": 1
+      },
+      "evidence_ids": [],
+      "evidence_snapshots": [],
+      "answer": "实验B超时为5秒。",
+      "locator_status": "invalid",
+      "support_status": "not_checked",
+      "cache_hit": false,
+      "elapsed_ms": 0.0717,
+      "run_kind": "offline_replay",
+      "request_id": "3311a1a1-1526-4ed3-90e4-fc755398535e"
+    },
+    "result": "FAIL"
+  },
+  {
+    "id": "B13",
+    "kind": "边界-状态如实化",
+    "title": "R04：draft 与原文相反（原文\"没有测量\"），只因 ID 有效就标 supported（spec 第4条）",
+    "expected": "主修复版仍为 supported（问题仍在）；FixedEngine 无语义检查，改标 not_checked，不再冒充已支持",
+    "actual": {
+      "CacheKeyFixEngine": "supported",
+      "FixedEngine": "not_checked"
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "B14",
+    "kind": "边界-未修复",
+    "title": "R07（doc_ids=[missing]）：未知文档应返回 invalid_scope（spec 第1条）",
+    "expected": "按 spec 应有明确 invalid_scope 状态；当前只返回 invalid + not_checked（问题仍在）",
+    "actual": {
+      "case": "R07",
+      "request": {
+        "query": "metadata",
+        "doc_ids": [
+          "missing"
+        ],
+        "snapshot": "v1",
+        "k": 2
+      },
+      "evidence_ids": [],
+      "evidence_snapshots": [],
+      "answer": "这个文档存在。",
+      "locator_status": "invalid",
+      "support_status": "not_checked",
+      "cache_hit": false,
+      "elapsed_ms": 0.0625,
+      "run_kind": "offline_replay",
+      "request_id": "6fb17d58-0dfb-4408-8d85-eaf5808f3844"
+    },
+    "result": "FAIL"
+  }
+]

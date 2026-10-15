@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>B 题修复前后对照</title>
+<style>
+body{max-width:1200px;margin:24px auto;font:15px system-ui;padding:0 16px;color:#1d2733}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{border:1px solid #cfd7e0;border-radius:8px;padding:12px}
+h2{font-size:17px;margin:4px 0 8px}table{border-collapse:collapse;width:100%}td{border-top:1px solid #e3e8ee;padding:4px 6px;vertical-align:top}
+td:first-child{color:#555;width:150px}.bad{color:#b3261e;font-weight:600}.ok{color:#1b6e3a;font-weight:600}.warn{color:#8a5a00}
+.ev{background:#f4f6f8;padding:6px;margin:4px 0;border-radius:4px}button,select{padding:6px 10px;margin:4px}small{color:#666}
+</style>
+<h1>B 题：修复前后对照（离线重放，无模型调用）</h1>
+<p><small>同一请求同时交给原样机与修复版。耗时为本地函数时间（offline_replay），不代表 LLM 耗时。复现主故障：不勾选清空，依次运行 R01 → R02。</small></p>
+<select id="cases"></select><label><input type="checkbox" id="reset">运行前清空两个 Engine 的状态</label><button id="run">运行</button>
+<div class="grid"><div class="card"><h2>原样机 challenge.Engine</h2><div id="original">等待运行</div></div>
+<div class="card"><h2>修复版 fixed_engine.FixedEngine</h2><div id="fixed">等待运行</div></div></div>
+<script>
+const $=id=>document.getElementById(id);
+function row(t,k,v,cls){const tr=document.createElement('tr');const a=document.createElement('td');a.textContent=k;const b=document.createElement('td');b.textContent=v;if(cls)b.className=cls;tr.append(a,b);t.append(tr)}
+function render(box,r){box.textContent='';const t=document.createElement('table');const q=r.request;
+ row(t,'request_id',r.request_id);row(t,'当前请求',`doc_ids=${q.doc_ids.join(',')} / snapshot=${q.snapshot} / k=${q.k} / query="${q.query}"`);
+ const snaps=[...new Set(r.evidence.map(e=>e.snapshot))];const mismatch=snaps.some(s=>s!==q.snapshot);
+ row(t,'证据来源快照',snaps.length?snaps.join(','):'（无证据）',mismatch?'bad':'ok');
+ if(mismatch)row(t,'⚠ 快照不一致','返回的证据不属于本次请求的资料版本','bad');
+ row(t,'cache_hit',String(r.cache_hit),r.cache_hit?'warn':'');row(t,'answer（固定draft）',r.answer);row(t,'citations',r.citations.join(','));
+ row(t,'locator_status',r.locator_status,r.locator_status==='valid'?'ok':'bad');
+ const sup=r.support_status==='supported'?'supported —— 注意：仅因引用ID有效，未做语义核验':r.support_status+' —— 未实现语义检查，未核验';
+ row(t,'support_status',sup,r.support_status==='supported'?'bad':'warn');row(t,'judgment_source',r.judgment_source);
+ row(t,'run_kind / elapsed_ms',`${r.run_kind} / ${r.elapsed_ms.toFixed(3)}`);box.append(t);
+ const h=document.createElement('p');h.textContent='实际证据：';box.append(h);
+ for(const e of r.evidence){const d=document.createElement('div');d.className='ev';d.textContent=`[${e.id}] doc=${e.doc_id} snapshot=${e.snapshot} page=${e.page}：${e.text}`;box.append(d)}}
+fetch('/api/cases').then(r=>r.json()).then(d=>d.cases.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=`${c.id} · ${c.request.doc_ids.join(',')} / ${c.request.snapshot} · ${c.request.query}`;$('cases').append(o)}));
+$('run').onclick=async()=>{try{const r=await fetch('/api/compare',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({case_id:$('cases').value,reset:$('reset').checked})});const d=await r.json();if(!r.ok){$('original').textContent=d.error;return}render($('original'),d.original);render($('fixed'),d.fixed)}catch(e){$('original').textContent=String(e)}};
+</script></html>
