@@ -25,9 +25,9 @@
         "locator_status": "valid",
         "support_status": "supported",
         "cache_hit": false,
-        "elapsed_ms": 0.0869,
+        "elapsed_ms": 0.1342,
         "run_kind": "offline_replay",
-        "request_id": "0ed679fb-ef79-4748-8403-fbbb46f0e099"
+        "request_id": "d8357510-4d54-457b-b4a4-c1eff708cfec"
       },
       {
         "case": "R02",
@@ -49,9 +49,9 @@
         "locator_status": "valid",
         "support_status": "supported",
         "cache_hit": true,
-        "elapsed_ms": 0.0247,
+        "elapsed_ms": 0.035,
         "run_kind": "offline_replay",
-        "request_id": "f188491b-8b21-4b5f-be0a-b6f6e980b212"
+        "request_id": "a86a9eaa-3d3d-4f88-8add-2cbc7d2c53bd"
       }
     ],
     "result": "PASS"
@@ -95,9 +95,9 @@
       "locator_status": "valid",
       "support_status": "supported",
       "cache_hit": false,
-      "elapsed_ms": 0.0314,
+      "elapsed_ms": 0.0441,
       "run_kind": "offline_replay",
-      "request_id": "0c559d6e-a7b6-4875-b97a-d489a914f54a"
+      "request_id": "bada5a10-1043-4d10-b30f-2ff0796b288f"
     },
     "result": "PASS"
   },
@@ -126,9 +126,9 @@
       "locator_status": "valid",
       "support_status": "supported",
       "cache_hit": false,
-      "elapsed_ms": 0.027,
+      "elapsed_ms": 0.0348,
       "run_kind": "offline_replay",
-      "request_id": "6cae0128-9343-47bb-a5e3-d165bfc4175d"
+      "request_id": "3d90862e-2c49-41fc-b0d5-67eb441b434d"
     },
     "result": "PASS"
   },
@@ -138,9 +138,9 @@
     "title": "原样机 R02 的\"更快\"来自命中旧缓存，而非更好的检索",
     "expected": "复现中 R02 cache_hit=True（未进入检索），新实例 cache_hit=False；耗时仅作参考（毫秒级，含波动），快 ≠ 对",
     "actual": {
-      "stale_hit_ms": 0.0247,
+      "stale_hit_ms": 0.035,
       "stale_cache_hit": true,
-      "fresh_ms": 0.0314,
+      "fresh_ms": 0.0441,
       "fresh_cache_hit": false
     },
     "result": "PASS"
@@ -171,9 +171,9 @@
         "locator_status": "valid",
         "support_status": "supported",
         "cache_hit": false,
-        "elapsed_ms": 0.0885,
+        "elapsed_ms": 0.0718,
         "run_kind": "offline_replay",
-        "request_id": "9bf8314f-11a6-42e9-9f1c-2db84c0b7947"
+        "request_id": "6c8aa7fe-0c9a-4e62-abfb-df1f7734d122"
       },
       {
         "case": "R02",
@@ -195,9 +195,9 @@
         "locator_status": "valid",
         "support_status": "supported",
         "cache_hit": false,
-        "elapsed_ms": 0.0505,
+        "elapsed_ms": 0.0494,
         "run_kind": "offline_replay",
-        "request_id": "7ab1be98-406b-43cb-9b8c-66f57158fc07"
+        "request_id": "0c49f032-d63f-4ac4-9aa3-f58266ec6964"
       }
     ],
     "result": "PASS"
@@ -227,9 +227,9 @@
       "locator_status": "valid",
       "support_status": "supported",
       "cache_hit": false,
-      "elapsed_ms": 0.0359,
+      "elapsed_ms": 0.0349,
       "run_kind": "offline_replay",
-      "request_id": "f37ed953-d926-4a00-8734-2a00863917b0"
+      "request_id": "8b8c5c2d-8b9a-446b-aecd-6b633c883b5d"
     },
     "result": "PASS"
   },
@@ -259,9 +259,9 @@
         "locator_status": "valid",
         "support_status": "supported",
         "cache_hit": false,
-        "elapsed_ms": 0.0354,
+        "elapsed_ms": 0.0327,
         "run_kind": "offline_replay",
-        "request_id": "524df403-3853-4790-a41e-89b96161b3d7"
+        "request_id": "ffe04ea9-18cc-4a29-91fb-40cc266a4c13"
       },
       {
         "case": "R06",
@@ -283,9 +283,9 @@
         "locator_status": "valid",
         "support_status": "supported",
         "cache_hit": false,
-        "elapsed_ms": 0.0419,
+        "elapsed_ms": 0.0335,
         "run_kind": "offline_replay",
-        "request_id": "37f7cd70-fb46-438c-8cb7-8618c5721b9e"
+        "request_id": "e31aa621-999b-493e-93c5-48cdcb9e154f"
       }
     ],
     "result": "PASS"
@@ -316,9 +316,9 @@
         "locator_status": "valid",
         "support_status": "supported",
         "cache_hit": false,
-        "elapsed_ms": 0.0316,
+        "elapsed_ms": 0.0661,
         "run_kind": "offline_replay",
-        "request_id": "21328a32-17de-4bd5-9c23-b78068543690"
+        "request_id": "f6c19a3b-21de-405f-bacb-c96915c1987a"
       },
       {
         "case": "R01",
@@ -340,9 +340,9 @@
         "locator_status": "valid",
         "support_status": "supported",
         "cache_hit": true,
-        "elapsed_ms": 0.025,
+        "elapsed_ms": 0.0307,
         "run_kind": "offline_replay",
-        "request_id": "0a2dd6df-0550-4696-8553-85fbeae49389"
+        "request_id": "b572b60d-6039-4dac-9212-6c0ddf9442f6"
       }
     ],
     "result": "PASS"
@@ -374,9 +374,9 @@
           "locator_status": "valid",
           "support_status": "supported",
           "cache_hit": false,
-          "elapsed_ms": 0.03,
+          "elapsed_ms": 0.0268,
           "run_kind": "offline_replay",
-          "request_id": "61051af7-e7de-4222-a91c-a4a3e39a88ca"
+          "request_id": "2d3e2a8a-7530-456c-a6cc-45d22923ee87"
         },
         {
           "case": "R02",
@@ -398,9 +398,9 @@
           "locator_status": "valid",
           "support_status": "supported",
           "cache_hit": false,
-          "elapsed_ms": 0.0299,
+          "elapsed_ms": 0.0207,
           "run_kind": "offline_replay",
-          "request_id": "24405e4c-9035-4aec-84d6-b2ccc6ed6931"
+          "request_id": "411d91b4-e41e-434e-b2d9-b20d945c5342"
         }
       ],
       "R02_then_R01": [
@@ -424,9 +424,9 @@
           "locator_status": "valid",
           "support_status": "supported",
           "cache_hit": false,
-          "elapsed_ms": 0.0278,
+          "elapsed_ms": 0.0187,
           "run_kind": "offline_replay",
-          "request_id": "a952b2d8-3542-4196-8fa5-e5b76b03c66a"
+          "request_id": "c97502d0-a72a-4da9-b74f-b8be02e38135"
         },
         {
           "case": "R01",
@@ -448,9 +448,9 @@
           "locator_status": "valid",
           "support_status": "supported",
           "cache_hit": false,
-          "elapsed_ms": 0.0278,
+          "elapsed_ms": 0.0186,
           "run_kind": "offline_replay",
-          "request_id": "69c1dca1-f921-4a54-8ab4-13ec8c08e3c0"
+          "request_id": "8a912fe9-d9bb-4abd-bb83-c28b536bf543"
         }
       ]
     },
@@ -481,9 +481,9 @@
       "locator_status": "valid",
       "support_status": "supported",
       "cache_hit": false,
-      "elapsed_ms": 0.1257,
+      "elapsed_ms": 0.0174,
       "run_kind": "offline_replay",
-      "request_id": "18cab946-1796-4a57-8dc9-804ff24cdae0"
+      "request_id": "22e4c911-fb57-47d5-9c32-d238d1072a93"
     },
     "result": "PASS"
   },
@@ -514,9 +514,9 @@
         "locator_status": "valid",
         "support_status": "supported",
         "cache_hit": false,
-        "elapsed_ms": 0.1125,
+        "elapsed_ms": 0.0181,
         "run_kind": "offline_replay",
-        "request_id": "66095bdc-852a-40bf-a11b-cb74dd59cced"
+        "request_id": "54bea578-6c54-411c-af78-db1c5bde0f1b"
       },
       {
         "case": "R01",
@@ -539,9 +539,9 @@
         "locator_status": "valid",
         "support_status": "supported",
         "cache_hit": true,
-        "elapsed_ms": 0.0677,
+        "elapsed_ms": 0.0137,
         "run_kind": "offline_replay",
-        "request_id": "69f00fdc-ecdf-45b9-8296-6ca26bf688e8"
+        "request_id": "13223773-88cc-4090-99a4-46e2fed02bd3"
       }
     ],
     "result": "PASS"
@@ -567,9 +567,9 @@
       "locator_status": "invalid",
       "support_status": "not_checked",
       "cache_hit": false,
-      "elapsed_ms": 0.0717,
+      "elapsed_ms": 0.0156,
       "run_kind": "offline_replay",
-      "request_id": "3311a1a1-1526-4ed3-90e4-fc755398535e"
+      "request_id": "0befe2bb-192d-441f-9ad3-1f5f059b7632"
     },
     "result": "FAIL"
   },
@@ -605,9 +605,9 @@
       "locator_status": "invalid",
       "support_status": "not_checked",
       "cache_hit": false,
-      "elapsed_ms": 0.0625,
+      "elapsed_ms": 0.0178,
       "run_kind": "offline_replay",
-      "request_id": "6fb17d58-0dfb-4408-8d85-eaf5808f3844"
+      "request_id": "ffb75d00-fbc9-41f6-bac1-55eb8518c494"
     },
     "result": "FAIL"
   }
