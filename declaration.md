@@ -12,7 +12,7 @@
 - 起草 report.md、README.md、decisions.md 部分条目与本声明
 
 **本人核验并承担的关键判断及核验方法**
-- 正式题参考答案：逐题对照 `cases.json` 原文核对推理【核对结果：全部同意 / 修改了 Txx——待填】
+- 正式题参考答案：逐题对照 `cases.json` 原文核对推理（核对结果：全部同意，逐题对照 cases.json 原文核对）
 - 论文数字：亲自在论文 §2 核对 75.8%、53.8%、56.1%
 - 思考模式默认开启：亲自阅读 DeepSeek 文档，连通性测试中 `reasoning_content` 为空
 - 随机性检查：亲自运行 D01 R1 三次并比对 student hash

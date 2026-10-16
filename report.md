@@ -3,7 +3,7 @@
 > 草稿说明：本报告由 Claude 根据仓库中的运行记录与笔记起草，本人逐段核对数字与路径后修改定稿。
 
 进阶选择：**B 系统失效诊断**　
-代码版本：最终 commit【待填，见收集表】；上游基点 `b028d90`（Shiina413/ANTLab-Agent-Tasks）
+代码版本：见 README「最终 commit」（代码、报告、结果均在此版本）；其后仅一次提交只修改本行，收集表登记的是那一次提交（tag: `final-submission`）；上游基点 `b028d90`（Shiina413/ANTLab-Agent-Tasks）
 数据/配置 hash：cases.json `c37cda40…`；基线 student.py `9a1fa281…`（tag `freeze-baseline`, commit `b5da369`）；改进版见 tag `freeze-improved`
 
 ---
