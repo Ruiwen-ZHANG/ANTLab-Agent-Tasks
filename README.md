@@ -1,7 +1,7 @@
 # ANTLab Agent 考核作品：基础题 + 进阶 B（系统失效诊断）
 
 - 上游：https://github.com/Shiina413/ANTLab-Agent-Tasks ，源码基点 `b028d90f43f44585cf085a3f607516a94f485e88`
-- 最终分支：`main`；最终 commit SHA：
+- 最终分支：`main`；最终 commit SHA：内容版本 `f96f9bad8d936abf5cd0e11d8f728752a93e9ba1`（代码、报告、结果均在此版本）；其后仅一次提交只修改本行，收集表登记的是那一次提交（tag: `final-submission`）
 - 查看本人全部改动：`git diff b028d90 HEAD --stat`
 - 整合报告：[report.md](report.md)；决策：[decisions.md](decisions.md)；声明：[declaration.md](declaration.md)；过程笔记：[notes.md](notes.md)
 
